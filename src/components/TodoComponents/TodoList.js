@@ -21,7 +21,7 @@ export default class TodoList extends React.Component {
         return(
             <>
                 {
-                    tasks.map(task => <Todo task = {task.task} markCompleted={markCompleted}/>)
+                    tasks.map(task => <Todo task = {task.task} isCompleted = {task.isCompleted} id = {task.id} markCompleted={markCompleted}/>)
                 }
             </>
         )

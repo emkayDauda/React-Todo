@@ -1,27 +1,33 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
 
 export default class Todo extends React.Component {
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            isCompleted: false
-        }
+    this.state = {
+      isCompleted: false
+    };
 
-        this.markCompleted = props.markCompleted.bind(this);
-    }
+    // this.markCompleted = props.markCompleted.bind(this);
+  }
 
+  render() {
+    const { task, id, markCompleted, isCompleted } = this.props;
+    // const {  } = this.state;
 
-    render() {
-        const { task } = this.props;
-        const { isCompleted } = this.state;
-
-        return (
-            <div>
-                <h5 onClick = {this.markCompleted}>
-                    {task}
-                </h5>
-            </div>
-        )
-    }
+    return (
+      <div>
+        {isCompleted ? (
+          <CrossedH5 onClick={() => markCompleted(id)}>{task}</CrossedH5>
+        ) : (
+          <h5 onClick={() => markCompleted(id)}>{task}</h5>
+        )}
+      </div>
+    );
+  }
 }
+
+const CrossedH5 = styled.h5`
+  text-decoration: line-through;
+`;

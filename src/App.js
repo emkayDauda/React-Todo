@@ -6,7 +6,12 @@ import TodoList from './components/TodoComponents/TodoList'
 const initalList = [
   {
     task: "aNewTask",
-    id: "",
+    id: "0",
+    isCompleted: false
+  },
+  {
+    task: "anotherTask",
+    id: "1",
     isCompleted: false
   }
 ];
@@ -22,13 +27,19 @@ class App extends React.Component {
     this.state = {
       tasks: initalList
     }
-    // this.markCompleted = this.markCompleted.bind(this);
+    this.markCompleted = this.markCompleted.bind(this);
   }
-  markCompleted(){
-    const { isCompleted } =  this.state;
-    console.log(isCompleted);
+  markCompleted(id){
+    const { tasks } =  this.state;
+    // console.log(isCompleted);
+    const unMarkedTasks = tasks.filter(task => task.id !== id)
+    const task = tasks.filter(task => task.id === id)[0]
+    task.isCompleted = !task.isCompleted
+    const newTasks =[...unMarkedTasks, task]
+    console.log(newTasks);
+    
     this.setState({
-      isCompleted: !isCompleted
+      tasks: newTasks
     })
     
   }
