@@ -1,11 +1,11 @@
 import React from 'react';
 
-class Todo extends React.Component {
+export default class Todo extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            isCompleted = false
+            isCompleted: false
         }
 
         this.markCompleted = props.markCompleted.bind(this);
@@ -18,7 +18,7 @@ class Todo extends React.Component {
 
         return (
             <div>
-                <h5>
+                <h5 onClick = {this.markCompleted}>
                     {task}
                 </h5>
             </div>
