@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList'
+import AddTaskForm from './components/TodoComponents/TodoForm'
 
 
 
@@ -28,6 +29,7 @@ class App extends React.Component {
       tasks: initalList
     }
     this.markCompleted = this.markCompleted.bind(this);
+    this.addTask = this.addTask.bind(this);
   }
   markCompleted(id){
     const { tasks } =  this.state;
@@ -36,21 +38,39 @@ class App extends React.Component {
     const task = tasks.filter(task => task.id === id)[0]
     task.isCompleted = !task.isCompleted
     const newTasks =[...unMarkedTasks, task]
-    console.log(newTasks);
     
     this.setState({
       tasks: newTasks
     })
+    console.log(tasks);
     
   }
 
+  addTask(formValues, actions){
+    const { tasks } =  this.state;
+    const newTask = {
+      task: formValues.task,
+      id: Date.now(),
+      isCompleted: false
+    }
+    
+    const newTasks = [...tasks, newTask]
+    
+    actions.resetForm();
+    this.setState({
+      tasks: newTasks
+    })
+    console.log(tasks);
+  }
+
   render() {
-    const { tasks } = this.state;
+    // const { tasks } = this.state;
     // const { markCompleted } = this.props;
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList tasks = {tasks} markCompleted={this.markCompleted}/>
+        <AddTaskForm onSubmit={this.addTask} />
+        <TodoList tasks = {this.state.tasks} markCompleted={this.markCompleted}/>
       </div>
     );
   }
