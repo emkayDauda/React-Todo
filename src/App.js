@@ -30,6 +30,7 @@ class App extends React.Component {
     }
     this.markCompleted = this.markCompleted.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.clearMarked = this.clearMarked.bind(this);
   }
   markCompleted(id){
     const { tasks } =  this.state;
@@ -63,6 +64,17 @@ class App extends React.Component {
     console.log(tasks);
   }
 
+  clearMarked(event){
+    const {tasks} = this.state;
+    const newTasks = tasks.filter(task => task.isCompleted === false)
+
+    this.setState({
+      tasks: newTasks
+    })
+    // console.log(tasks);
+    
+  }
+
   render() {
     // const { tasks } = this.state;
     // const { markCompleted } = this.props;
@@ -71,6 +83,7 @@ class App extends React.Component {
         <h2>Welcome to your Todo App!</h2>
         <AddTaskForm onSubmit={this.addTask} />
         <TodoList tasks = {this.state.tasks} markCompleted={this.markCompleted}/>
+        <button onClick={this.clearMarked}>Clear Marked</button>
       </div>
     );
   }
