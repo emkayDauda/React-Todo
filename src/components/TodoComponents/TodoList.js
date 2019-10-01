@@ -9,14 +9,11 @@ export default class TodoList extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {
-            tasks: props.tasks
-        }
 
     }
 
     render() {
-        const { tasks } = this.state;
+        const { tasks } = this.props;
         const { markCompleted } = this.props;
         return(
             <>
